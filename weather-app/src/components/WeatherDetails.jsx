@@ -31,3 +31,4 @@ function WeatherDetails({ wybraneMiasto }) {
 }
 
 export default WeatherDetails;
+//d
