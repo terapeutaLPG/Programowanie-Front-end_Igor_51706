@@ -8,7 +8,6 @@ function App() {
   const [wybraneMiasto, setWybraneMiasto] = useState(null);
   const [wszystkieMiasta, setWszystkieMiasta] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [query, setQuery] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleClick = (miasto) => {
@@ -50,7 +49,7 @@ function App() {
 
       <div className="weather-list">
         {wszystkieMiasta
-          .filter((d) => d.miasto.toLowerCase().includes(query.toLowerCase()))
+          .filter((d) => d.miasto.toLowerCase().includes(searchTerm.toLowerCase()))
           .map((dane) => (
             <WeatherCard
               key={dane.miasto}
