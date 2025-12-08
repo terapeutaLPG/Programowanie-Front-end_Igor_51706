@@ -42,6 +42,32 @@ h1 {
   text-transform: uppercase;
 }
 
+.search-tile {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.search-tile input {
+  width: 100%;
+  max-width: 480px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.02);
+  color: #eaf2ff;
+  font-size: 1rem;
+  outline: none;
+  transition: box-shadow 150ms, border-color 150ms;
+}
+.search-tile input::placeholder {
+  color: var(--muted);
+  text-transform: lowercase;
+}
+.search-tile input:focus {
+  box-shadow: 0 6px 20px rgba(96, 165, 250, 0.08);
+  border-color: rgba(96, 165, 250, 0.36);
+}
+
 .weather-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));

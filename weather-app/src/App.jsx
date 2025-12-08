@@ -8,6 +8,8 @@ function App() {
   const [wybraneMiasto, setWybraneMiasto] = useState(null);
   const [wszystkieMiasta, setWszystkieMiasta] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [query, setQuery] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleClick = (miasto) => {
     setWybraneMiasto(miasto);
@@ -35,17 +37,29 @@ function App() {
 
   return (
     <>
+      <div className="search-tile">
+        <input
+          aria-label="Szukaj miasta"
+          placeholder="szukaj miasto"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+
       <h1>Pogoda</h1>
+
       <div className="weather-list">
-        {wszystkieMiasta.map((dane) => (
-          <WeatherCard
-            key={dane.miasto}
-            miasto={dane.miasto}
-            temperatura={dane.temperatura}
-            onClick={() => handleClick(dane)}
-            isSelected={wybraneMiasto?.miasto === dane.miasto}
-          />
-        ))}
+        {wszystkieMiasta
+          .filter((d) => d.miasto.toLowerCase().includes(query.toLowerCase()))
+          .map((dane) => (
+            <WeatherCard
+              key={dane.miasto}
+              miasto={dane.miasto}
+              temperatura={dane.temperatura}
+              onClick={() => handleClick(dane)}
+              isSelected={wybraneMiasto?.miasto === dane.miasto}
+            />
+          ))}
       </div>
 
       {wybraneMiasto && <WeatherDetails wybraneMiasto={wybraneMiasto} />}
