@@ -1,18 +1,29 @@
-function WeatherCard({ miasto, temperatura, onClick, isSelected }) {
+import { useSelector } from 'react-redux'
+import { convertTemperature, getUnitSymbol } from '../utils/temperature'
+
+function WeatherCard(props) {
+  const unit = useSelector(state => state.settings.temperatureUnit)
+  const displayTemp = convertTemperature(props.temperatura, unit)
+  const unitSymbol = getUnitSymbol(unit)
+  const className = `city-card${props.selected ? ' selected' : ''}`
+
   return (
     <div
-      className={`weather-card ${isSelected ? "selected" : ""}`}
-      onClick={onClick}
+      className={className}
+      onClick={props.onClick}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") onClick && onClick();
-      }}
+      onKeyPress={e => { if (e.key === 'Enter') props.onClick && props.onClick() }}
     >
-      <div className="city">{miasto}</div>
-      <div className="temp">{temperatura}°C</div>
+      <h2>{props.miasto}</h2>
+      <div className="meta">
+        <div className="temp">
+          {props.temperatura ? displayTemp + unitSymbol : '-'}
+        </div>
+        <div className="cond">{props.pogoda || ''}</div>
+      </div>
     </div>
-  );
+  )
 }
 
-export default WeatherCard;
+export default WeatherCard

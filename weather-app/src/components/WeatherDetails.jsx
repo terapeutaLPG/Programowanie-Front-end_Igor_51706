@@ -1,20 +1,28 @@
-function WeatherDetails({ wybraneMiasto }) {
-  if (!wybraneMiasto) return null;
+import WeatherIcon from './WeatherIcon';
+import { useSelector } from 'react-redux';
+import { convertTemperature, getUnitSymbol } from '../utils/temperature';
+
+function WeatherDetails({ miasto }) {
+  const unit = useSelector((state) => state.settings.temperatureUnit);
+  const unitSymbol = getUnitSymbol(unit);
+
+  if (!miasto) return null;
 
   return (
-    <div className="details">
-      <h3>Szczegóły pogody: {wybraneMiasto.miasto}</h3>
-      <p>Wiatr: {wybraneMiasto.wiatr} km/h</p>
-      <p>Pogoda: {wybraneMiasto.pogoda}</p>
-      <p>Kierunek wiatru: {wybraneMiasto.kierunekWiatru}</p>
-      <p>Zachmurzenie: {wybraneMiasto.zachmurzenie}</p>
-
-      <h4 style={{ marginTop: 12 }}>5-dniowa prognoza</h4>
-      <div>
-        {wybraneMiasto.prognoza5dni.map((dzien) => (
-          <div key={dzien.dzien} style={{ marginBottom: 8 }}>
-            <strong>{dzien.dzien}:</strong> {dzien.temperatura}°C —{" "}
-            {dzien.pogoda} — {dzien.kierunekWiatru} — {dzien.zachmurzenie}
+    <div className="weather-details">
+      <div className="details-item">
+        <strong>Temperatura:</strong>
+        <div>
+          {convertTemperature(miasto.aktualnaTemperatura, unit)}
+          {unitSymbol}
+        </div>
+      </div>
+      {/* ...inne szczegóły pogody... */}
+      <div className="forecast">
+        {miasto.prognoza5dniowa.map((dzień, idx) => (
+          <div key={idx} className="details-item">
+            Temperatura: {convertTemperature(dzień.temperatura, unit)}
+            {unitSymbol}
           </div>
         ))}
       </div>
