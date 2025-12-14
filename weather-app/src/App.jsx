@@ -5,7 +5,6 @@ import WeatherDetails from "./components/WeatherDetails.jsx";
 import miasta from "./data/weatherData.jsx";
 
 function App() {
-  const [wybraneMiasto, setWybraneMiasto] = useState(null);
   const [wszystkieMiasta, setWszystkieMiasta] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
