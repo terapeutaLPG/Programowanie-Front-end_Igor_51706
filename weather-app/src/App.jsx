@@ -1,27 +1,22 @@
 import "./App.css";
-import WeatherCard from "./components/WeatherCard.jsx";
 import { useState, useEffect } from "react";
-import WeatherDetails from "./components/WeatherDetails.jsx";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import miasta from "./data/weatherData.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import CityDetailPage from "./pages/CityDetailPage.jsx";
+import FavoritesPage from "./pages/FavoritesPage.jsx";
 
 function App() {
   const [wszystkieMiasta, setWszystkieMiasta] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const handleClick = (miasto) => {
-    setWybraneMiasto(miasto);
-  };
 
   useEffect(() => {
     const loadData = async () => {
       setLoading(true);
-      // symulacja ładowania danych
       await new Promise((resolve) => setTimeout(resolve, 600));
       setWszystkieMiasta(miasta);
       setLoading(false);
     };
-
     loadData();
   }, []);
 
@@ -34,34 +29,13 @@ function App() {
   }
 
   return (
-    <>
-      <div className="search-tile">
-        <input
-          aria-label="Szukaj miasta"
-          placeholder="szukaj miasto"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
-
-      <h1>Pogoda</h1>
-
-      <div className="weather-list">
-        {wszystkieMiasta
-          .filter((d) => d.miasto.toLowerCase().includes(searchTerm.toLowerCase()))
-          .map((dane) => (
-            <WeatherCard
-              key={dane.miasto}
-              miasto={dane.miasto}
-              temperatura={dane.temperatura}
-              onClick={() => handleClick(dane)}
-              isSelected={wybraneMiasto?.miasto === dane.miasto}
-            />
-          ))}
-      </div>
-
-      {wybraneMiasto && <WeatherDetails wybraneMiasto={wybraneMiasto} />}
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage miasta={miasta} />} />
+        <Route path="/miasto/:cityId" element={<CityDetailPage miasta={miasta} />} />
+        <Route path="/ulubione" element={<FavoritesPage miasta={miasta} />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
