@@ -51,5 +51,5 @@ dodać.</p>
     </div> 
   ); 
 } 
- 
+ //t
 export default FavoritesPage;
