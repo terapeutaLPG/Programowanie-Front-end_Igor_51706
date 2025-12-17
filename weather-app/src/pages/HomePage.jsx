@@ -1,9 +1,9 @@
-import { useState } from "react";
+//import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UnitSwitcher from "../components/UnitSwitcher";
 import WeatherCard from "../components/WeatherCard";
 import "../styles/HomePage.css";
-
+import { useState, useMemo, useCallback } from "react";
 const HomePage = ({ miasta }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
