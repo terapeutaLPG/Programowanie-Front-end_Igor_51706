@@ -41,7 +41,7 @@ const HomePage = ({ miasta }) => {
 
       {filteredMiasta.length === 0 ? (
         <div style={{ textAlign: "center", padding: "2rem", color: "#9aa4b2" }}>
-          <p>Nie znaleziono miast spełniających kryteria wyszukiwania.</p>
+          <p>nie znaleziono miast spelniających kryteria wyszukiwania </p>
         </div>
       ) : (
         <div className="weather-list">
