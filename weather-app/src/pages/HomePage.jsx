@@ -1,20 +1,27 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import UnitSwitcher from '../components/UnitSwitcher';
-import WeatherCard from '../components/WeatherCard';
-import '../styles/HomePage.css';
-
+//import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import UnitSwitcher from "../components/UnitSwitcher";
+import WeatherCard from "../components/WeatherCard";
+import "../styles/HomePage.css";
+import { useState, useMemo, useCallback } from "react";
 const HomePage = ({ miasta }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
-  const filteredMiasta = miasta.filter((m) =>
-    m.miasto.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredMiasta = useMemo(
+    () =>
+      miasta.filter((m) =>
+        m.miasto.toLowerCase().includes(searchTerm.toLowerCase())
+      ),
+    [miasta, searchTerm]
   );
 
-  const handleClick = (dane) => {
-    navigate(`/miasto/${dane.id}`, { state: { miasto: dane } });
-  };
+  const handleClick = useCallback(
+    (dane) => {
+      navigate(`/miasto/${dane.id}`, { state: { miasto: dane } });
+    },
+    [navigate]
+  );
 
   return (
     <div className="home-page">
@@ -33,8 +40,8 @@ const HomePage = ({ miasta }) => {
       </div>
 
       {filteredMiasta.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: '2rem', color: '#9aa4b2' }}>
-          <p>Nie znaleziono miast spełniających kryteria wyszukiwania.</p>
+        <div style={{ textAlign: "center", padding: "2rem", color: "#9aa4b2" }}>
+          <p>nie znaleziono miast spelniających kryteria wyszukiwania </p>
         </div>
       ) : (
         <div className="weather-list">
