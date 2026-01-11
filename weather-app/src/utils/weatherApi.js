@@ -1,6 +1,6 @@
 // Uwaga: Użyj własnego klucza API z https://openweathermap.org/api
 // Aby uzyskać darmowy klucz, zarejestruj się na https://openweathermap.org/api
-const API_KEY = 'b6fd4267a3bdb0ee573f147e2826b428';
+const API_KEY = '904f39378b05f275da44b205cd084c7e';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 
 const polishCityNames = {

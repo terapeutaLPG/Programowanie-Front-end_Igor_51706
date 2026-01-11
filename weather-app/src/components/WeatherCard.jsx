@@ -2,11 +2,26 @@ import { useSelector, useDispatch } from 'react-redux'
 import { convertTemperature, getUnitSymbol } from '../utils/temperature'
 import { toggleFavorite } from '../store/slices/favoritesSlice'
 
-function WeatherCard({ miasto, temperatura, onClick, isSelected, cityId, icon, opady }) {
+function WeatherCard({ miasto, temperatura, onClick, isSelected, cityId, icon, opady, ikonka }) {
   const unit = useSelector(state => state.settings.temperatureUnit)
   const displayTemp = convertTemperature(temperatura, unit)
   const unitSymbol = getUnitSymbol(unit)
   const className = `weather-card${isSelected ? ' selected' : ''}`
+  
+  // Mapowanie ikon na emoji
+  const iconEmoji = {
+    '01d': '☀️', '01n': '🌙',
+    '02d': '⛅', '02n': '🌙',
+    '03d': '☁️', '03n': '☁️',
+    '04d': '☁️', '04n': '☁️',
+    '09d': '🌧️', '09n': '🌧️',
+    '10d': '🌧️', '10n': '🌧️',
+    '11d': '⛈️', '11n': '⛈️',
+    '13d': '❄️', '13n': '❄️',
+    '50d': '🌫️', '50n': '🌫️',
+  }
+  
+  const iconCode = ikonka || icon
   
   const dispatch = useDispatch()
   const favoriteIds = useSelector((state) => state.favorites.favoriteIds)
@@ -48,12 +63,10 @@ function WeatherCard({ miasto, temperatura, onClick, isSelected, cityId, icon, o
         </button>
       )}
       <div className="city">{miasto}</div>
-      {icon && (
-        <img 
-          src={`https://openweathermap.org/img/wn/${icon}@2x.png`} 
-          alt={`Ikona pogody dla ${miasto}`}
-          style={{ width: '50px', height: '50px' }}
-        />
+      {iconCode && (
+        <div style={{ fontSize: '3rem', margin: '5px 0' }}>
+          {iconEmoji[iconCode] || '🌤️'}
+        </div>
       )}
       <div className="temp">{displayTemp} {unitSymbol}</div>
       {opady && <div style={{ fontSize: '0.9rem', color: '#9aa4b2' }}>{opady}</div>}
