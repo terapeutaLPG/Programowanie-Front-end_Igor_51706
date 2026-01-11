@@ -44,6 +44,8 @@ const HomePage = ({ miasta }) => {
               cityId={dane.id}
               miasto={dane.miasto}
               temperatura={dane.temperatura}
+              icon={dane.icon}
+              opady={dane.opady}
               onClick={() => handleClick(dane)}
             />
           ))}

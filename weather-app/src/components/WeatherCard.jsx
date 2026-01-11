@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { convertTemperature, getUnitSymbol } from '../utils/temperature'
 import { toggleFavorite } from '../store/slices/favoritesSlice'
 
-function WeatherCard({ miasto, temperatura, onClick, isSelected, cityId }) {
+function WeatherCard({ miasto, temperatura, onClick, isSelected, cityId, icon, opady }) {
   const unit = useSelector(state => state.settings.temperatureUnit)
   const displayTemp = convertTemperature(temperatura, unit)
   const unitSymbol = getUnitSymbol(unit)
@@ -48,7 +48,15 @@ function WeatherCard({ miasto, temperatura, onClick, isSelected, cityId }) {
         </button>
       )}
       <div className="city">{miasto}</div>
+      {icon && (
+        <img 
+          src={`https://openweathermap.org/img/wn/${icon}@2x.png`} 
+          alt={`Ikona pogody dla ${miasto}`}
+          style={{ width: '50px', height: '50px' }}
+        />
+      )}
       <div className="temp">{displayTemp} {unitSymbol}</div>
+      {opady && <div style={{ fontSize: '0.9rem', color: '#9aa4b2' }}>{opady}</div>}
     </div>
   )
 }
