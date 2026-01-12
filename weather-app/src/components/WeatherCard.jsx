@@ -8,7 +8,7 @@ function WeatherCard({ miasto, temperatura, onClick, isSelected, cityId, icon, o
   const unitSymbol = getUnitSymbol(unit)
   const className = `weather-card${isSelected ? ' selected' : ''}`
   
-  // Mapowanie ikon na emoji
+  
   const iconEmoji = {
     '01d': '☀️', '01n': '🌙',
     '02d': '⛅', '02n': '🌙',

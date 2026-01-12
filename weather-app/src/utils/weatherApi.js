@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 // Uwaga: Użyj własnego klucza API z https://openweathermap.org/api
 // Aby uzyskać darmowy klucz, zarejestruj się na https://openweathermap.org/api
 const API_KEY = '904f39378b05f275da44b205cd084c7e';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
-=======
-import axios from "axios";
-
-const API_KEY = "b6fd4267a3bdb0ee573f147e2826b428";
-const BASE_URL = "https://api.openweathermap.org/data/2.5";
->>>>>>> 7068af517cc220713a483e68c657306875722bcd
 
 const polishCityNames = {
   warsaw: { pl: "Warszawa", coords: { lat: 52.2297, lon: 21.0122 } },
